@@ -56,8 +56,8 @@ import { ProductService } from 'src/app/services/product.service';
         {path: 'my/orders', component: MyOrdersComponent },
         {path: 'login', component: LoginComponent },
         
-        {path: 'admin/products/new', component: ProductFormComponent },
-        {path: 'admin/products/:id', component: ProductFormComponent },
+        {path: 'admin/product/new', component: ProductFormComponent },
+        {path: 'admin/product/:id', component: ProductFormComponent },
         {path: 'admin/products', component: AdminProductsComponent },
         
         {path: 'admin/orders', component: AdminOrdersComponent }

@@ -33,12 +33,19 @@ export class ProductFormComponent implements OnInit {
                 
     let id = this.route.snapshot.paramMap.get('id');
     if(id){
-      this.commonService.getItem('http://localhost/onlineshopping/get_product.php', id)
-                        .take(1)
-                        .subscribe(p => {
-                            this.product = p.json();
-                            console.log(p.json());
-                          });
+      commonService.getItem('http://localhost/onlineshopping/get_product.php', id)
+                    .take(1)
+                    .subscribe(p => {
+                        let product_data = p.json();
+                        if(product_data.length == 1){
+                          this.product = {
+                            'title' : product_data[0]['title'],
+                            'price' : product_data[0]['price'],
+                            'category' : product_data[0]['category_id'],
+                            'imageUrl' : product_data[0]['imageUrl']
+                          };
+                        }
+                    });
     }    
    }
 
