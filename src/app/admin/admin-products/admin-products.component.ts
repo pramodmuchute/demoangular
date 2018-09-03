@@ -1,15 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
 import { HttpHeaders } from '@angular/common/http';
-import { Http } from '@angular/http';
-//import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import { webSocket } from 'rxjs/webSocket';
+//import 'rxjs/Rx';
 
-const httpOptions = {
-  headers: new HttpHeaders(
-    { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
-    )
-};
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-admin-products',
@@ -19,26 +13,17 @@ const httpOptions = {
 export class AdminProductsComponent implements OnInit {
   allProducts$: any[];
   constructor(
-    private productService: ProductService,
-    private http: Http
+    private commonService: CommonService
   ) { 
-    //this.allProducts$ = productService.getAll();
-    productService.getAll()
-    //.map(res => res.json());
-    .subscribe(Response => {
-      this.allProducts$ = Response.json();
-      console.log(Response.json());
-    });
-    //console.log(this.allProducts$);
-    
-    //console.log(this.allProducts$);
+    commonService.getAll('http://localhost/onlineshopping/products.php')
+                .subscribe(Response => {
+                  this.allProducts$ = Response.json();
+                  console.log(Response.json());
+                });
   }
 
   ngOnInit() {
     
-    // .subscribe(Response => {
-    //   console.log(Response.json());
-    // });
   }
 
 }

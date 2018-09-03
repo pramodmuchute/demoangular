@@ -1,9 +1,36 @@
 import { Injectable } from '@angular/core';
+import { RequestOptions, Response, Http } from '@angular/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+
+const myheader = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+@Injectable()
 export class CommonService {
 
-  constructor() { }
+  constructor(
+    private http: Http,
+    private httpClient: HttpClient
+  ) { }
+  
+  getAll(url){
+    return this.http.get(url);
+  }
+
+  create(url, data, headers){
+    // let testheaders = new Headers({ 
+    //   //"Content-Type": "*",
+    //   "Access-Control-Allow-Origin": "*",
+    //   "Access-Control-Request-Headers": "*",
+    //   "Access-Control-Allow-Methods": "GET, POST"
+    // });
+    // let options = new RequestOptions({ headers: headers });
+    return this.http.post(url, JSON.stringify(data));
+  }
+
+  getItem(url, itemId){
+    return this.http.get(url+'/'+itemId);
+  }
+
 }
