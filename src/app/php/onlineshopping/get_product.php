@@ -5,7 +5,7 @@ header("Access-Control-Allow-Methods: GET, POST");
 include 'db_conn.php';
 
 
-$sql = "SELECT id, title, price, imageUrl FROM products WHERE id=1";
+$sql = "SELECT id, title, price, imageUrl, category_id FROM products WHERE id=1";
 $result = $conn->query($sql);
 
 $data = array();
