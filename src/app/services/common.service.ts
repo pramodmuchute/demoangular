@@ -30,7 +30,14 @@ export class CommonService {
   }
 
   getItem(url, itemId){
-    return this.http.get(url+'/'+itemId);
+    return this.http.get(url+'?id='+itemId);
   }
 
+  update(url, itemId, data) {
+    return this.http.post(url+'?id='+itemId, JSON.stringify(data));
+  }
+
+  delete(url, itemId) {
+    return this.http.get(url+'?id='+itemId);
+  }
 }

@@ -17,9 +17,14 @@ export class LoginComponent implements OnInit {
   signIn(credentials){
     this.authService.login(credentials)
         .subscribe(result => {
-          if(result)
-            this.router.navigate(['/']);
-          else
+          if(result){
+            let returnUrl = localStorage.getItem('returnUrl');
+            if(returnUrl){
+              localStorage.removeItem('returnUrl');
+              this.router.navigateByUrl(returnUrl);
+            }else
+              this.router.navigate(['/']);
+          }else
             this.invalidLogin= true;
         })
   }

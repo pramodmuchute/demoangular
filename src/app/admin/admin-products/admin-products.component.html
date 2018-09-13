@@ -1,20 +1,30 @@
 <p>
   <a routerLink="/admin/product/new" class="btn btn-primary">Add New Product</a>
 </p>
+<p>
+  <input 
+  #query
+  (keyup)="filter(query.value)"
+  type="text" class="form-control" placeholder="Search..."> 
+</p>
 <table class="table">
   <thead>
     <tr>
       <th>Title</th>
       <th>Price</th>
-      <th>Action</th>
+      <th>Edit</th>
+      <th>Delete</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of allProducts$">
+    <tr *ngFor="let product of filterProducts">
       <td>{{ product.title }}</td>
       <td>{{ product.price }}</td>
       <td>
-        <a [routerLink]="['admin/product/', product.id]">Edit</a>
+        <a class="btn btn-primary" [routerLink]="['/admin/product/', product.id]">Edit</a>
+      </td>
+      <td>
+        <a class="btn btn-primary" type="button" href="javascript:void(0)" (click)="delete(product.id)">Delete</a>
       </td>
     </tr>
   </tbody>

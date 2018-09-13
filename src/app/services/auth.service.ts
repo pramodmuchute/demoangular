@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs-compat/add/operator/map';
 
 @Injectable({
@@ -10,10 +10,13 @@ export class AuthService {
 
   constructor(
     private http: Http,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   login(credentials){
+    let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+    localStorage.setItem('returnUrl', returnUrl);
     return this.http.post('http://localhost/onlineshopping/user_validate.php', 
                       JSON.stringify(credentials)
                     )

@@ -12,7 +12,9 @@ import 'rxjs-compat/add/operator/take';
 })
 export class ProductFormComponent implements OnInit {
   allCategories$: any[];
-  product = {};
+  product = {}; 
+  id;
+
   headers = new HttpHeaders({
     //"Content-Type": "application/json", 
     "Access-Control-Request-Headers": "X-Requested-With, accept, content-type",
@@ -31,9 +33,9 @@ export class ProductFormComponent implements OnInit {
                   console.log(Response.json());
                 });
                 
-    let id = this.route.snapshot.paramMap.get('id');
-    if(id){
-      commonService.getItem('http://localhost/onlineshopping/get_product.php', id)
+    this.id = this.route.snapshot.paramMap.get('id');
+    if(this.id){
+      commonService.getItem('http://localhost/onlineshopping/get_product.php', this.id)
                     .take(1)
                     .subscribe(p => {
                         let product_data = p.json();
@@ -53,17 +55,29 @@ export class ProductFormComponent implements OnInit {
   }
 
   save(product) {
-    this.commonService.create('http://localhost/onlineshopping/create_product.php', product, this.headers)
+    if(this.id){
+      console.log(this.id);
+      this.commonService.update('http://localhost/onlineshopping/update_product.php', this.id, product)
+                      .subscribe(
+                        Response => {
+                          console.log(Response);
+                          if(Response.status == 200){
+                            this.router.navigate(['admin/products']);  
+                          }
+                        },
+                        err => { console.log("Error occured"); }
+                      );
+    }else{
+      this.commonService.create('http://localhost/onlineshopping/create_product.php', product, this.headers)
                       .subscribe(
                         Response => {
                           if(Response.status == 200){
                             this.router.navigate(['admin/products']);  
                           }
                         },
-                        err => {
-                          console.log("Error occured");
-                        }
+                        err => { console.log("Error occured"); }
                       );
+    }
   }
 
   getItem(product) {
