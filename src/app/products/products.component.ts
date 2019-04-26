@@ -16,12 +16,12 @@ export class ProductsComponent {
     route: ActivatedRoute,
     commonService: CommonService
     ) { 
-    commonService.getAll('http://localhost/onlineshopping/products.php')
+    commonService.getAll('http://localhost.onlineshopping/products.php')
                 .subscribe(Response => {
                   this.products$ = Response.json();
                 });
 
-    commonService.getAll('http://localhost/onlineshopping/categories.php')
+    commonService.getAll('http://localhost.onlineshopping/categories.php')
                 .subscribe(Response => {
                   this.categories$ = Response.json();
                 });

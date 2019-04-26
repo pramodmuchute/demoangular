@@ -27,7 +27,7 @@ export class ProductFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    commonService.getAll('http://localhost/onlineshopping/categories.php')
+    commonService.getAll('http://localhost.onlineshopping/categories.php')
                 .subscribe(Response => {
                   this.allCategories$ = Response.json();
                   console.log(Response.json());
@@ -35,7 +35,7 @@ export class ProductFormComponent implements OnInit {
                 
     this.id = this.route.snapshot.paramMap.get('id');
     if(this.id){
-      commonService.getItem('http://localhost/onlineshopping/get_product.php', this.id)
+      commonService.getItem('http://localhost.onlineshopping/get_product.php', this.id)
                     .take(1)
                     .subscribe(p => {
                         let product_data = p.json();
@@ -57,7 +57,7 @@ export class ProductFormComponent implements OnInit {
   save(product) {
     if(this.id){
       console.log(this.id);
-      this.commonService.update('http://localhost/onlineshopping/update_product.php', this.id, product)
+      this.commonService.update('http://localhost.onlineshopping/update_product.php', this.id, product)
                       .subscribe(
                         Response => {
                           console.log(Response);
@@ -68,7 +68,7 @@ export class ProductFormComponent implements OnInit {
                         err => { console.log("Error occured"); }
                       );
     }else{
-      this.commonService.create('http://localhost/onlineshopping/create_product.php', product, this.headers)
+      this.commonService.create('http://localhost.onlineshopping/create_product.php', product, this.headers)
                       .subscribe(
                         Response => {
                           if(Response.status == 200){
@@ -81,7 +81,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   getItem(product) {
-    this.commonService.create('http://localhost/onlineshopping/create_category.php', product, this.headers)
+    this.commonService.create('http://localhost.onlineshopping/create_category.php', product, this.headers)
                       .subscribe(
                         Response => {
                           if(Response.status == 200){
