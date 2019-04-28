@@ -19,7 +19,7 @@ export class ProductsComponent {
     route: ActivatedRoute,
     commonService: CommonService
     ) { 
-    commonService.getAll('http://localhost/onlineshopping/products.php')
+    commonService.getAll('http://onshopapi/products.php')
                 .subscribe(Response => {
                   this.products$ = Response.json();
                   route.queryParamMap.subscribe(params => {
@@ -27,7 +27,7 @@ export class ProductsComponent {
                   });
                 });
 
-    commonService.getAll('http://localhost/onlineshopping/categories.php')
+    commonService.getAll('http://onshopapi/categories.php')
                 .subscribe(Response => {
                   this.categories$ = Response.json();
                 });

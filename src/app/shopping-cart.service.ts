@@ -10,4 +10,16 @@ export class ShoppingCartService {
   create(){
     
   }
+
+  getOrCreateCart(){
+      let cartId = localStorage.getItem('cartId');
+      if(!cartId){
+        this.create();
+
+        //Add product cart
+      }else{
+
+        //Add product cart
+      }
+  }
 }

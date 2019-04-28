@@ -21,7 +21,7 @@
       </div>
       <div class="form-group">
         <label for="imageUrl">ImageUrl</label>
-        <input #imageUrl="ngModel" [(ngModel)]="product.imageUrl" name="imageUrl" id="imageUrl" type="text" class="form-control">
+        <input #imageUrl="ngModel" [(ngModel)]="product.imageUrl" url="\images" ngf-accept="'image/*'" name="imageUrl" id="imageUrl" type="file">
       </div>
       <button class="btn btn-primary">Save</button>&nbsp;
       <a routerLink="/admin/products" class="btn btn-danger">Cancel</a>

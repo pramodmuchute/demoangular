@@ -17,7 +17,7 @@ export class AuthService {
   login(credentials){
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     localStorage.setItem('returnUrl', returnUrl);
-    return this.http.post('http://localhost/onlineshopping/user_validate.php', 
+    return this.http.post('http://onshopapi/user_validate.php', 
                       JSON.stringify(credentials)
                     )
                     .map(Response => {
