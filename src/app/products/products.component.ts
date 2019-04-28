@@ -19,6 +19,7 @@ export class ProductsComponent {
     route: ActivatedRoute,
     commonService: CommonService
     ) { 
+
     commonService.getAll('http://onshopapi/products.php')
                 .subscribe(Response => {
                   this.products$ = Response.json();
@@ -26,6 +27,7 @@ export class ProductsComponent {
                     this.category = params.get('category');  
                   });
                 });
+
 
     commonService.getAll('http://onshopapi/categories.php')
                 .subscribe(Response => {

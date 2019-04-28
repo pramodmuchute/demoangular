@@ -20,6 +20,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     private commonService: CommonService,
     private router: Router
   ) { 
+
     this.subscription = commonService.getAll('http://onshopapi/products.php')
                 .subscribe(Response => {
                   this.filterProducts = this.allProducts$ = Response.json();
@@ -43,6 +44,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   delete(id){
     console.log("ad");
     if(confirm('Are you sure you want to delete?')){
+
       this.commonService.delete('http://onshopapi/delete_product.php', id)
                         .subscribe(
                           Response => {
